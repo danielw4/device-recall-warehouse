@@ -1,0 +1,65 @@
+Rows used: 71,790
+Rows dropped for missing covariates: 1,642
+The ``p_value_threshold`` is set at 0.05. Even under the null hypothesis of no violations, some
+covariates will be below the threshold by chance. This is compounded when there are many covariates.
+Similarly, when there are lots of observations, even minor deviances from the proportional hazard
+assumption will be flagged.
+
+With that in mind, it's best to use a combination of statistical tests and visual tests to determine
+the most serious violations. Produce visual plots using ``check_assumptions(..., show_plots=True)``
+and looking for non-constant lines. See link [A] below for a full example.
+
+<lifelines.StatisticalResult: proportional_hazard_test>
+ null_distribution = chi squared
+degrees_of_freedom = 1
+             model = <lifelines.CoxPHFitter: fitted with 71790 total observations, 63498 right-censored observations>
+         test_name = proportional_hazard_test
+
+---
+                                 test_statistic      p  -log2(p)
+clearance_type_Abbreviated km              0.21   0.64      0.64
+                           rank            4.64   0.03      5.00
+clearance_type_Special     km              0.17   0.68      0.56
+                           rank            9.76 <0.005      9.13
+decision_year              km             28.49 <0.005     23.34
+                           rank           19.36 <0.005     16.50
+device_class               km              6.24   0.01      6.32
+                           rank            1.08   0.30      1.74
+
+
+1. Variable 'device_class' failed the non-proportional test: p-value is 0.0125.
+
+   Advice: with so few unique values (only 3), you can include `strata=['device_class', ...]` in the
+call in `.fit`. See documentation in link [E] below.
+
+2. Variable 'decision_year' failed the non-proportional test: p-value is <5e-05.
+
+   Advice 1: the functional form of the variable 'decision_year' might be incorrect. That is, there
+may be non-linear terms missing. The proportional hazard test used is very sensitive to incorrect
+functional forms. See documentation in link [D] below on how to specify a functional form.
+
+   Advice 2: try binning the variable 'decision_year' using pd.cut, and then specify it in
+`strata=['decision_year', ...]` in the call in `.fit`. See documentation in link [B] below.
+
+   Advice 3: try adding an interaction term with your time variable. See documentation in link [C]
+below.
+
+
+3. Variable 'clearance_type_Special' failed the non-proportional test: p-value is 0.0018.
+
+   Advice: with so few unique values (only 2), you can include `strata=['clearance_type_Special',
+...]` in the call in `.fit`. See documentation in link [E] below.
+
+4. Variable 'clearance_type_Abbreviated' failed the non-proportional test: p-value is 0.0312.
+
+   Advice: with so few unique values (only 2), you can include
+`strata=['clearance_type_Abbreviated', ...]` in the call in `.fit`. See documentation in link [E]
+below.
+
+---
+[A]  https://lifelines.readthedocs.io/en/latest/jupyter_notebooks/Proportional%20hazard%20assumption.html
+[B]  https://lifelines.readthedocs.io/en/latest/jupyter_notebooks/Proportional%20hazard%20assumption.html#Bin-variable-and-stratify-on-it
+[C]  https://lifelines.readthedocs.io/en/latest/jupyter_notebooks/Proportional%20hazard%20assumption.html#Introduce-time-varying-covariates
+[D]  https://lifelines.readthedocs.io/en/latest/jupyter_notebooks/Proportional%20hazard%20assumption.html#Modify-the-functional-form
+[E]  https://lifelines.readthedocs.io/en/latest/jupyter_notebooks/Proportional%20hazard%20assumption.html#Stratification
+

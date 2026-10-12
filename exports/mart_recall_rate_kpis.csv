@@ -1,0 +1,54 @@
+dimension,level,cleared_count,recalled_count,recall_percentage,median_years_to_first_recall
+decision_year,2015,3001,395,13.1623,2.7625
+decision_year,2014,3173,422,13.2997,2.2861
+decision_year,2003,3506,528,15.0599,6.1615
+decision_year,2025,3177,90,2.8329,0.5832
+decision_year,2026,2313,14,0.6053,0.2067
+decision_year,2005,3151,543,17.2326,4.8296
+decision_year,2010,2804,426,15.1926,3.5647
+decision_year,2009,3004,421,14.0146,4.0383
+clearance_type,Special,13637,2114,15.5019,3.2663
+specialty,Physical Medicine,1964,74,3.7678,3.885
+decision_year,2024,3071,119,3.875,1.0075
+decision_year,2021,2991,193,6.4527,1.9192
+decision_year,2023,3291,173,5.2568,1.4073
+device_class,2,67297,8003,11.8921,3.1348
+device_class,Missing,22,1,4.5455,2.1602
+specialty,Hematology,813,171,21.0332,4.5311
+specialty,Pathology,54,6,11.1111,1.5934
+specialty,"General, Plastic Surgery",7507,615,8.1924,3.8111
+specialty,"Gastroenterology, Urology",4398,653,14.8477,3.373
+specialty,Obstetrics/Gynecology,1765,90,5.0992,4.8898
+decision_year,2008,3049,469,15.3821,4.3039
+specialty,Anesthesiology,2656,382,14.3825,3.2293
+specialty,Microbiology,1696,202,11.9104,3.8193
+decision_year,2022,3185,169,5.3061,1.7166
+decision_year,2007,2980,463,15.5369,4.4956
+device_class,U,1620,110,6.7901,3.9343
+specialty,Radiology,8717,1400,16.0606,2.0602
+decision_year,2006,3213,516,16.0598,4.7817
+decision_year,2004,3362,553,16.4485,5.6345
+decision_year,2017,3166,375,11.8446,2.4148
+decision_year,2011,3114,474,15.2216,3.0363
+specialty,Cardiovascular,9049,1226,13.5485,2.7762
+specialty,Dental,5839,198,3.391,4.7789
+specialty,Neurology,3397,357,10.5093,2.924
+decision_year,2012,3122,456,14.606,2.9555
+specialty,General Hospital,5846,583,9.9726,3.6331
+specialty,Clinical Chemistry,2803,505,18.0164,3.2361
+specialty,Medical Genetics,11,2,18.1818,5.5483
+decision_year,2013,3034,426,14.0409,2.7721
+specialty,Orthopedic,11528,1416,12.2831,3.7509
+decision_year,2020,2894,257,8.8804,2.4504
+device_class,1,4248,207,4.8729,5.1499
+clearance_type,Traditional,57684,6024,10.4431,3.1417
+specialty,Unknown,1641,111,6.7642,3.9261
+specialty,Ophthalmic,1306,136,10.4135,3.2266
+specialty,Immunology,862,126,14.6172,6.3915
+decision_year,2016,2928,363,12.3975,2.9678
+specialty,"Ear, Nose, Throat",846,73,8.6288,3.7344
+decision_year,2018,3008,295,9.8072,2.4641
+decision_year,2019,2895,263,9.0846,2.5243
+device_class,3,245,82,33.4694,3.6769
+clearance_type,Abbreviated,2111,265,12.5533,3.5756
+specialty,Clinical Toxicology,734,77,10.4905,4.3422

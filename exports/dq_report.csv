@@ -1,0 +1,10 @@
+metric,issue_count
+unparseable_recall_event_date_initiated,21
+unparseable_recall_event_date_posted,0
+unparseable_recall_event_date_terminated,0
+unparseable_510k_decision_date,0
+unparseable_510k_date_received,0
+recall_rows_without_k_numbers,20585
+recalled_k_numbers_missing_from_510k,6
+links_dropped_for_predating_decision,155
+510k_rows_without_classification_match,1644
