@@ -20,6 +20,20 @@ def main() -> None:
             table = sql_file.stem.split("_", 1)[1]
             count = connection.execute(f"SELECT count(*) FROM {table}").fetchone()[0]
             print(f"{table}: {count:,} rows")
+            if table == "mart_process_control_pchart":
+                mixed = connection.execute(
+                    """
+                    SELECT count(*)
+                    FROM (
+                        SELECT res_event_number
+                        FROM stg_recalls
+                        GROUP BY res_event_number
+                        HAVING count(event_date_initiated) > 0
+                           AND count(DISTINCT nullif(trim(root_cause_description), '')) > 1
+                    )
+                    """
+                ).fetchone()[0]
+                print(f"recall events with multiple root causes: {mixed:,}")
 
 
 if __name__ == "__main__":

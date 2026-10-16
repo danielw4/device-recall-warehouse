@@ -10,6 +10,7 @@ TABLES = [
     "mart_recall_rate_kpis",
     "mart_root_cause_trends",
     "mart_km_curves",
+    "mart_process_control_pchart",
     "dq_report",
 ]
 

@@ -1,4 +1,4 @@
-"""Build the three static figures used to inspect the marts."""
+"""Build the static figures used to inspect the marts."""
 
 import os
 from pathlib import Path
@@ -12,6 +12,7 @@ os.environ.setdefault("MPLCONFIGDIR", str(matplotlib_config))
 import matplotlib
 
 matplotlib.use("Agg")
+import matplotlib.dates as mdates
 import matplotlib.pyplot as plt
 
 
@@ -56,6 +57,9 @@ def main() -> None:
             ORDER BY recall_year, root_cause_description
             """
         ).fetchdf()
+        pchart = connection.execute(
+            "SELECT * FROM mart_process_control_pchart ORDER BY month"
+        ).fetchdf()
 
     figure, axis = plt.subplots(figsize=(8, 5))
     for clearance_type, group in km.groupby("clearance_type", sort=True):
@@ -83,6 +87,35 @@ def main() -> None:
     axis.set(xlabel="Recall year", ylabel="Share of recall products (%)", xticks=range(2008, 2026, 2))
     axis.legend(title="Root cause", frameon=False, fontsize=8)
     save(figure, output_dir / "root_cause_share_over_time.png")
+
+    figure, axis = plt.subplots(figsize=(11, 6))
+    axis.plot(
+        pchart["month"],
+        100 * pchart["p"],
+        color="#4c78a8",
+        marker="o",
+        markersize=3,
+        linewidth=1,
+        label="Monthly share",
+    )
+    axis.axhline(100 * pchart["p_bar"].iloc[0], color="#555555", label="Center line")
+    axis.step(pchart["month"], 100 * pchart["ucl"], where="post", color="#f58518", label="3-sigma control limits")
+    axis.step(pchart["month"], 100 * pchart["lcl"], where="post", color="#f58518", label="_nolegend_")
+    signals = pchart[pchart["out_of_control"]]
+    axis.scatter(
+        signals["month"],
+        100 * signals["p"],
+        color="#e45756",
+        marker="X",
+        s=45,
+        label="Out of control",
+        zorder=3,
+    )
+    axis.set(xlabel="Recall event month", ylabel="Process control recall events (%)")
+    axis.xaxis.set_major_locator(mdates.YearLocator(2))
+    axis.xaxis.set_major_formatter(mdates.DateFormatter("%Y"))
+    axis.legend(frameon=False, ncol=3)
+    save(figure, output_dir / "process_control_pchart.png")
 
 
 if __name__ == "__main__":

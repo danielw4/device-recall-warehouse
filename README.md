@@ -70,6 +70,23 @@ so recent shares for every named cause are understated.
 
 ![Root cause share over time](reports/figures/root_cause_share_over_time.png)
 
+**Process control chart.** `sql/11_mart_process_control_pchart.sql` builds a p-chart of the
+monthly share of recall events whose firm-reported root cause is "Process control", from January
+2010 to August 2026 (200 months, 13,952 events with an informative root cause). Each recall event
+counts once. Events coded "Other", "Under Investigation by firm" or "Unknown/Undetermined by firm"
+are left out of the denominator.
+
+The center line is 14.6%, but a single center line does not describe this process. The share
+roughly doubled, from about 9% a year in 2010-2013 to 21-24% in 2021-2025. Before 2018, 81 of 96
+months sit below the center line; from 2018 on, 88 of 104 sit above it. The run rule (eight or more
+months in a row on one side) flags 87 months, and 7 months fall above the upper 3-sigma limit, all
+between 2019 and 2025. In SPC terms this is a sustained shift, not random variation around a stable
+rate. The chart cannot say why. Manufacturing problems may have grown, or firms may label causes
+differently now; the growth of "Under Investigation by firm" (see above) is one sign that coding
+practice changed over the same period.
+
+![Process control p-chart](reports/figures/process_control_pchart.png)
+
 **Model check.** The proportional-hazards test flags decision year and device class. For
 Special 510(k)s the two test variants disagree (p = 0.68 and p < 0.005). With 72,000
 observations small departures are detectable, and the curves above do not cross, so the hazard
